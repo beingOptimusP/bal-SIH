@@ -33,8 +33,6 @@ const rows = [
     { id: 123456, reg_no: 'MH 12 SD 2304', txn: '0000000000dcnshcnszxjd', mine_id:  17900249, time_in: '2:30 PM', time_out: '4:00 PM', created: '0 min ago'},
     { id: 123456, reg_no: 'MH 12 SD 2304', txn: '0000000000dcnshcnszxjd', mine_id:  17900249, time_in: '2:30 PM', time_out: '4:00 PM', created: '0 min ago'},
     { id: 123456, reg_no: 'MH 12 SD 2304', txn: '0000000000dcnshcnszxjd', mine_id:  17900249, time_in: '2:30 PM', time_out: '4:00 PM', created: '0 min ago'},
-
-
 ];
 
 export default function Dashboard() {
@@ -45,7 +43,6 @@ export default function Dashboard() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
       />
     </div>
   );
