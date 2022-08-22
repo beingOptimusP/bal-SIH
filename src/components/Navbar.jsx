@@ -46,8 +46,8 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" sticky >
+    <Box sx={{ display: 'flex',padding : "0px !important"}}>
+      <AppBar component="nav" sx={{padding : "0.8rem !important" , borderRadius : "0 !important"}} sticky >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -76,7 +76,7 @@ function Navbar(props) {
             {navItems.map((navItem) => (
               <Button
                 key={navItem}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', paddingX : "1.5rem !important" }}
               >
                 {navItem}
               </Button>

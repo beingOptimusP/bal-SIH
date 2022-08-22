@@ -20,8 +20,11 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-
+import Link from '@mui/material/Link';
 function createData(id, name, tx, mine, timeIn, timeOut, createdAt) {
+  const d = new Date(createdAt * 1000);
+  const created = d.toLocaleString();
+
   return {
     id,
     name,
@@ -29,159 +32,39 @@ function createData(id, name, tx, mine, timeIn, timeOut, createdAt) {
     mine,
     timeIn,
     timeOut,
-    createdAt,
+    created,
   };
 }
 
-const rows = [
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    67,
-    4.3,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    51,
-    4.9,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    24,
-    6.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    24,
-    4.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    49,
-    3.9,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    87,
-    6.5,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913h",
-    17900249,
-    37,
-    4.3,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    94,
-    0.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913t",
-    17900249,
-    65,
-    7.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    98,
-    0.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    81,
-    2.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    9,
-    37.0,
-    "00:00"
-  ),
-  createData(
-    12,
-    "MH 12 DE 2304",
-    "0x0ea326070d387fdbdec4e36fbe00f20044c8811001e964946a87114bd1ad2913",
-    17900249,
-    63,
-    4.0,
-    "00:00"
-  ),
-];
+// function descendingComparator(a, b, orderBy) {
+//   if (b[orderBy] < a[orderBy]) {
+//     return -1;
+//   }
+//   if (b[orderBy] > a[orderBy]) {
+//     return 1;
+//   }
+//   return 0;
+// }
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+// function getComparator(order, orderBy) {
+//   return order === "desc"
+//     ? (a, b) => descendingComparator(a, b, orderBy)
+//     : (a, b) => -descendingComparator(a, b, orderBy);
+// }
 
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
+// // This method is created for cross-browser compatibility, if you don't
+// // need to support IE11, you can use Array.prototype.sort() directly
+// function stableSort(array, comparator) {
+//   const stabilizedThis = array.map((el, index) => [el, index]);
+//   stabilizedThis.sort((a, b) => {
+//     const order = comparator(a[0], b[0]);
+//     if (order !== 0) {
+//       return order;
+//     }
+//     return a[1] - b[1];
+//   });
+//   return stabilizedThis.map((el) => el[0]);
+// }
 
 const headCells = [
   {
@@ -203,36 +86,29 @@ const headCells = [
     label: "Txn Hash",
   },
   {
-    id: "mine",
+    id: "block",
     numeric: true,
     disablePadding: false,
-    label: "Mine Center",
+    label: "Block",
   },
   {
-    id: "timeIn",
+    id: "weight",
     numeric: true,
     disablePadding: false,
-    label: "Time In",
-  },
-  {
-    id: "timeOut",
-    numeric: true,
-    disablePadding: false,
-    label: "Time Out",
+    label: "Weight",
   },
   {
     id: "createdAt",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "createdAt",
   },
 ];
 
 function EnhancedTableHead(props) {
-  const { order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+  // const createSortHandler = (property) => (event) => {
+  //   onRequestSort(event, property);
+  // };
 
   return (
     <TableHead>
@@ -242,20 +118,8 @@ function EnhancedTableHead(props) {
             key={headCell.id}
             align={"left"}
             padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+            {headCell.label}
           </TableCell>
         ))}
       </TableRow>
@@ -264,10 +128,7 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
+  numSelected: PropTypes.number,
   rowCount: PropTypes.number.isRequired,
 };
 
@@ -306,21 +167,28 @@ const EnhancedTableToolbar = (props) => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number,
 };
 
-export default function EnhancedTable() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
+export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
+  let rows = [];
+ 
+  rows = props.data.map((obj) => {
+    return createData(
+      obj.block,
+      obj.truckId,
+      obj.txHash,
+      obj.block,
+      obj.timeOut,
+      obj.weight,
+      obj.timeOut
+    );
+  });
+
+  console.log(rows);
 
   const handleClick = (event, name) => {
     return;
@@ -335,33 +203,23 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "80%", margin: "auto", marginTop : "10px" }}>
-      <Paper elevation={6} sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+    <Box sx={{ width: "80%", margin: "auto", marginTop: "10px" }}>
+      <Paper elevation={6} sx={{ width: "100%", mb: 2,border: "0.01px solid #3D95DF" }}>
+        <EnhancedTableToolbar />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={"medium"}
           >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
+            <EnhancedTableHead rowCount={rows.length} />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -371,7 +229,7 @@ export default function EnhancedTable() {
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                     >
                       <TableCell id={labelId}>{row.id}</TableCell>
                       <TableCell
@@ -384,18 +242,18 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell
                         sx={{
-                          maxWidth: 100, // Percentage Also Works
+                          maxWidth: 150, // Percentage Also Works
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {row.tx}
+                       <Link href={`https://goerli.etherscan.io/tx/${row.tx}`}color='#00EDB4' underline="none" target="_blank"> {row.tx} </Link> 
                       </TableCell>
                       <TableCell>{row.mine}</TableCell>
-                      <TableCell>{row.timeIn}</TableCell>
+                      {/* <TableCell>{row.timeIn}</TableCell> */}
                       <TableCell>{row.timeOut}</TableCell>
-                      <TableCell>{row.createdAt}</TableCell>
+                      <TableCell>{row.created}</TableCell>
                     </TableRow>
                   );
                 })}
